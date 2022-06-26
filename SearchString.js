@@ -302,3 +302,42 @@ function sortProperties(obj) {
 
   return rtnArray;
 }
+
+//highlight words in the search
+function performMark() {
+  //read the keyword
+
+  var keyword = document.getElementById("keyword").value;
+  var display = document.getElementById("fileContent");
+
+  var newContent = "";
+  //find all the currently marked items
+
+  let spans = document.querySelectorAll("mark");
+
+  for (var i = 0; i < spans.length; i++) {
+    spans[i].outerHTML = spans[i].innerHTML;
+  }
+
+  var re = new RegExp(keyword, "gi");
+  var replaceText = "<mark id='markme'>$&</mark>";
+  var bookContent = display.innerHTML;
+
+  newContent = bookContent.replace(re, replaceText);
+  display.innerHTML = newContent;
+
+  var count = document.querySelectorAll("mark").length;
+  document.getElementById("searchstat").innerHTML =
+    "found " + count + " matches";
+
+  if (count > 0) {
+    var element = document.getElementById("markme");
+    element.scrollIntoView;
+  }
+}
+
+// functionalities to add:
+// 1. pagination for the books
+//2. ability to upload the books you want to get info of
+//3. polish the front end to look nicer
+//
